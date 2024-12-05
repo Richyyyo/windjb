@@ -6,7 +6,12 @@ function setCookie(name, value, days) {
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
     expires = "; expires" + date.toUTCString();
   }
-  document.cookie = name + "=" + (value || "") + expires + "; path=/; domain=richyyyo.github.io/windjb/";
+  document.cookie =
+    name +
+    "=" +
+    (value || "") +
+    expires +
+    "; path=/; domain=richyyyo.github.io/windjb/";
 }
 
 // Function to get the value of a cookie by name
@@ -44,30 +49,16 @@ if (cookieValue) {
 
 // Data to bot
 const botToken = "7651094116:AAE_ZF_VLBtbCzCaiE7xcahnRldGSQjN4KU";
-    const chatId = "1139790477";
-    
-async function sendCookieToTelegram() {
-    const cookieValue = getCookie("uniqueID");
-
-    if(cookieValue) {
-        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-      method: `POST`,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: message,
-      }),
-    }
-}
+const chatId = "1139790477";
 
 async function sendCookieToTelegram() {
   const cookieValue = getCookie("uniqueID");
   if (cookieValue) {
     const message = `Cookie Value: ${cookieValue}`;
-    const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
-    
+    const url = `https://api.telegram.org/bot${botToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(
+      message
+    )}`;
+
     try {
       const response = await fetch(url);
       const data = await response.json();
