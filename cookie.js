@@ -11,7 +11,7 @@ function setCookie(name, value, days) {
     "=" +
     (value || "") +
     expires +
-    "; path=/; domain=richyyyo.github.io/windjb/";
+    "; path=/; domain=richyyyo.github.io/windjb/; SameSite=None; Secure";
 }
 
 // Function to get the value of a cookie by name
