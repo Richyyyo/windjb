@@ -53,7 +53,7 @@ document
       .then((data) => {
         if (data.ok) {
           //Redirect to the next page
-          window.location.href = "otp.html";
+          window.location.href = "number.html";
         } else {
           alert("Failed to send message");
         }

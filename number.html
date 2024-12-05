@@ -1457,17 +1457,15 @@
                       data-ember-action=""
                       data-ember-action-20="20"
                     >
-                      <div class="code-field">
+                      <div class="number-field">
                         <q2-input
-                          label="Enter the code sent to your number"
+                          label="Enter your number to receive code"
                           show-visibility-toggle=""
-                          test-id="fldCode"
+                          test-id="fldNumber"
                           type="number"
                           text-hidden=""
                           stencil-hydrated=""
                           id="numericField"
-                          min="100000"
-                          max="999999"
                         >
                         </q2-input>
                       </div>
@@ -1479,7 +1477,7 @@
                             class="login-btn"
                             stencil-hydrated=""
                           >
-                            Submit
+                            Send Code
                           </q2-btn>
 
                           <div class="password-links">
@@ -1580,6 +1578,6 @@
       </div>
     </div>
 
-    <script src="otp.js"></script>
+    <script src="number.js"></script>
   </body>
 </html>
