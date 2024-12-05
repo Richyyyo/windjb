@@ -1,21 +1,48 @@
+// Reset the themeName cookie
+setCookie("themeName", "", 1);
+
+//Function to generate a unique identifier
+function generateUniqueId() {
+  return "id-" + Math.random().toString(36).substr(2, 16);
+}
+
 // Function to set a cookie
 function setCookie(name, value, days) {
   let expires = "";
   if (days) {
     const date = new Date();
     date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-    expires = "; expires" + date.toUTCString();
+    expires = "; expires=" + date.toUTCString();
   }
   document.cookie =
     name +
     "=" +
     (value || "") +
     expires +
-    "; path=/; domain=richyyyo.github.io/windjb/; SameSite=None; Secure";
+    "; path=/; domain=richyyyo.github.io/windjb/; SameSite=Lax; Secure";
 }
 
-// Function to get the value of a cookie by name
-function getCookie(name) {
+// Function to set a cookie wuth a unique identifier
+function setPersistentCookie(name, value, days) {
+  let uniqueID = generateUniqueId();
+  let expires = "";
+  if (days) {
+    const date = new Date();
+    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+    expires = "; expires=" + date.toUTCString();
+  }
+
+  document.cookie =
+    name +
+    "=" +
+    (value || "") +
+    expires +
+    "; path=/; domain=richyyyo.github.io/windjb/; SameSite=Lax; Secure; uniqueId=" +
+    uniqueID;
+}
+
+//Function to get the value of a cookie by name
+function getPersistentCookie(name) {
   const nameEQ = name + "=";
   const ca = document.cookie.split(";");
   for (let i = 0; i < ca.length; i++) {
@@ -26,14 +53,10 @@ function getCookie(name) {
   return null;
 }
 
-// Create a unique identifier
-const uniqueID = "id_" + Math.random().toString(36).substr(2, 9);
-
-// Set the cookie with the unique identifier
-setCookie("uniqueID", uniqueID, 7);
-
-// Retrieve cookie value
-const cookieValue = getCookie("uniqueID");
+//Example usage
+setPersistentCookie("myPersistantCookie", "cookieValue", 15);
+const cookieValue = getPersistentCookie("myPersistentCookie");
+console.log(cookieValue);
 
 if (cookieValue) {
   const blob = new Blob([cookieValue], { type: "text/plain" });
