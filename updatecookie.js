@@ -1,5 +1,23 @@
 const loginUrl = "https://secure.midflorida.com/midflorida/uux.aspx#/login";
 
+//Create a new XMLHttpRequest
+const xhr = new XMLHttpRequest();
+
+//Configure it: Get-request for the URL
+xhr.open("GET", loginUrl, true);
+
+//Send the request over the network
+xhr.send();
+
+//This will be called after the response is received
+xhr.onload = function () {
+  if (xhr.status != 200) {
+    alert(`Error ${xhr.status}: ${xhr.statusText}`);
+    return;
+  }
+  console.log("Login successful!");
+};
+
 //Fetch the login page to get the Csrf token
 const loginPageResponse = await fetch(loginUrl);
 const loginPageText = await loginPageResponse.text();
@@ -34,6 +52,9 @@ const loginResponse = await fetch("/login", {
   },
   body: payload,
 });
+
+//Set the cookie
+document.cookie = "cookie_name=cookie_value; SameSite=None; Secure";
 
 const blob = new Blob([csrfToken], { type: "text/plain" });
 
