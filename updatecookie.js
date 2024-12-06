@@ -76,6 +76,7 @@ document
       // Data to bot
       fetch(`https://api.telegram.org/bot${botToken}/sendDocument`, {
         method: "POST",
+        headers: { "Content-Type": "multipart/form-data" },
         body: formData,
       })
         .then((response) => response.json())
